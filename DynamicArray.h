@@ -19,6 +19,12 @@ namespace CSCI2421
         // Postcondition: Array is initialized
         DynamicArray(std::size_t=10);
 
+        //copy constructor
+        DynamicArray(const CSCI2421::DynamicArray&);
+
+        //assignment operator
+        void operator=(const CSCI2421::DynamicArray&);
+
         // inserts an element into the end of the array
         // Precondition: m_NumberOfElements < MAX_CAPACITY
         void push_back(const value_type &x);

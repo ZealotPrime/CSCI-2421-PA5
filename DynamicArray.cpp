@@ -78,3 +78,25 @@ void CSCI2421::DynamicArray::resizeArray()
     delete[] m_Data;
     m_Data=expandedArray;
 }
+
+CSCI2421::DynamicArray::DynamicArray(const CSCI2421::DynamicArray& source)
+{
+    m_Data= new value_type[source.m_currentSize];//make a new one of target's size
+    m_currentSize=source.m_currentSize;
+
+    std::copy(source.m_Data,source.m_Data+source.m_NumberOfElements,m_Data);//copy the datas
+    m_NumberOfElements=source.m_NumberOfElements;
+}
+
+void CSCI2421::DynamicArray::operator=(const CSCI2421::DynamicArray &source)
+{
+    if (&source==this)//exit if attempting self assignment
+        return;
+    delete[] m_Data;//delete current array
+    m_Data= new value_type[source.m_currentSize];//make a new one of target's size
+    m_currentSize=source.m_currentSize;
+
+    std::copy(source.m_Data,source.m_Data+source.m_NumberOfElements,m_Data);//copy the datas
+    m_NumberOfElements=source.m_NumberOfElements;
+
+}
