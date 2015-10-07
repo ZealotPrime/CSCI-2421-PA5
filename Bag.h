@@ -10,10 +10,11 @@
 
 namespace CSCI2421
 {
+    template<typename T>
     class Bag
     {
     public:
-        typedef int value_type;
+
 
         // Initializes the Bag
         // Postcondition: Bag is initialized
@@ -29,19 +30,19 @@ namespace CSCI2421
         // inserts an element into the Bag
         // Precondition: size() < CAPACITY
         // Postcondition: A new copy of entry has been added to the Bag
-        void insert(const value_type &x);
+        void insert(const T &x);
 
         // attempts to remove one element that is equal to x from the Bag.
         // Returns: true if the element was removed, else false. \
         // Precondition: none
         // Postcondition: one element that is equal to x is removed from the Bag.
-        bool erase_one(const value_type &x);
+        bool erase_one(const T &x);
 
         // erases every element that is equal to x from the Bag.
         // Returns: the number of elements erased
         // Precondition: none
         // Postcondition: all the elements that are equal to x are removed from the Bag
-        std::size_t erase(const value_type &x);
+        std::size_t erase(const T &x);
 
         // returns the number of elements in the bag
         // Precondition: none
@@ -51,7 +52,7 @@ namespace CSCI2421
         // returns the number of elements equal to x in the Bag
         // Precondition: none
         // Postcondition: none
-        std::size_t count(const value_type &x) const;
+        std::size_t count(const T &x) const;
 
         // returns the current maximum capacity of the Bag
         std::size_t capacity () const;
@@ -77,8 +78,9 @@ namespace CSCI2421
         std::size_t m_CurrentCapacity;
 
         // where the Bag stores it's elements
-        value_type *m_Data;
+        T *m_Data;
     };
 }
 
+#include "Bag.cpp"
 #endif //PA5_BAG_H

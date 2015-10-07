@@ -1,27 +1,28 @@
-#include "Bag.h"
+//#include "Bag.h"
 
 #include <algorithm>
 #include <iostream>
 
-
-CSCI2421::Bag::Bag(const std::size_t initialCapacity) : m_NumberOfElements(0), m_CurrentCapacity(initialCapacity)
+template<typename T>
+CSCI2421::Bag<T>::Bag(const std::size_t initialCapacity) : m_NumberOfElements(0), m_CurrentCapacity(initialCapacity)
 {
-    m_Data = new value_type[initialCapacity];
+    m_Data = new T[initialCapacity];
 }
-
-CSCI2421::Bag::Bag(const CSCI2421::Bag &source) : m_NumberOfElements(source.m_NumberOfElements),
+template<typename T>
+CSCI2421::Bag<T>::Bag(const CSCI2421::Bag &source) : m_NumberOfElements(source.m_NumberOfElements),
                                                   m_CurrentCapacity(source.m_CurrentCapacity)
 {
-    m_Data = new value_type[m_CurrentCapacity];
+    m_Data = new T[m_CurrentCapacity];
     std::copy (source.m_Data, source.m_Data + m_NumberOfElements, m_Data);
 }
-
-CSCI2421::Bag::~Bag()
+template<typename T>
+CSCI2421::Bag<T>::~Bag()
 {
     delete[] m_Data;
 }
 
-void CSCI2421::Bag::insert(const value_type& x)
+template<typename T>
+void CSCI2421::Bag<T>::insert(const T& x)
 {
     if (m_NumberOfElements == m_CurrentCapacity)
     {
@@ -31,7 +32,8 @@ void CSCI2421::Bag::insert(const value_type& x)
     m_NumberOfElements++;
 }
 
-bool CSCI2421::Bag::erase_one(const value_type& x)
+template<typename T>
+bool CSCI2421::Bag<T>::erase_one(const T& x)
 {
     for (std::size_t index = 0; index < m_NumberOfElements; index++)
     {
@@ -45,7 +47,8 @@ bool CSCI2421::Bag::erase_one(const value_type& x)
     return false;
 }
 
-std::size_t CSCI2421::Bag::erase(const value_type& x)
+template<typename T>
+std::size_t CSCI2421::Bag<T>::erase(const T& x)
 {
     std::size_t index = 0;
     std::size_t numberRemoved = 0;
@@ -66,12 +69,14 @@ std::size_t CSCI2421::Bag::erase(const value_type& x)
     return numberRemoved;
 }
 
-std::size_t CSCI2421::Bag::size() const
+template<typename T>
+std::size_t CSCI2421::Bag<T>::size() const
 {
     return m_NumberOfElements;
 }
 
-std::size_t CSCI2421::Bag::count(const value_type& x) const
+template<typename T>
+std::size_t CSCI2421::Bag<T>::count(const T& x) const
 {
     std::size_t counter = 0;
     for (std::size_t i = 0; i < m_NumberOfElements; i++)
@@ -84,7 +89,8 @@ std::size_t CSCI2421::Bag::count(const value_type& x) const
 
 }
 
-void CSCI2421::Bag::resizeArray(const std::size_t newCapacity)
+template<typename T>
+void CSCI2421::Bag<T>::resizeArray(const std::size_t newCapacity)
 {
     if (newCapacity <= m_CurrentCapacity)
     {
@@ -92,7 +98,7 @@ void CSCI2421::Bag::resizeArray(const std::size_t newCapacity)
         return;
     }
 
-    value_type* largerArray = new value_type[newCapacity];
+    T* largerArray = new T[newCapacity];
     std::copy (m_Data, m_Data + m_CurrentCapacity, largerArray);
 
     delete[] m_Data;
@@ -100,17 +106,17 @@ void CSCI2421::Bag::resizeArray(const std::size_t newCapacity)
     m_CurrentCapacity = newCapacity;
 }
 
-
-void CSCI2421::Bag::operator=(const CSCI2421::Bag &source)
+template<typename T>
+void CSCI2421::Bag<T>::operator=(const CSCI2421::Bag &source)
 {
     if (this == &source)
         return;
 
-    value_type* newData;
+    T* newData;
 
     if (m_CurrentCapacity != source.m_CurrentCapacity)
     {
-        newData = new value_type[source.m_CurrentCapacity];
+        newData = new T[source.m_CurrentCapacity];
         delete[] m_Data;
         m_Data = newData;
         m_CurrentCapacity = source.m_CurrentCapacity;
@@ -121,7 +127,8 @@ void CSCI2421::Bag::operator=(const CSCI2421::Bag &source)
 
 }
 
-void CSCI2421::Bag::print()
+template<typename T>
+void CSCI2421::Bag<T>::print()
 {
     std::cout << "Bag contains " << m_NumberOfElements << " elements: ";
     for (std::size_t i = 0; i < m_NumberOfElements; i++)
@@ -131,7 +138,8 @@ void CSCI2421::Bag::print()
     std::cout << std::endl;
 }
 
-size_t CSCI2421::Bag::capacity() const
+template<typename T>
+size_t CSCI2421::Bag<T>::capacity() const
 {
     return m_CurrentCapacity;
 }
