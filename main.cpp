@@ -1,44 +1,26 @@
-//
-// Created by zealot on 10/5/15.
-//
-#include <iostream>
-#include "DynamicArray.h"
-
-
+#include "Bag.h"
+#include <cstdlib>
+#include <string>
 
 using namespace std;
 
 int main()
 {
-    CSCI2421::DynamicArray testArray(21);
+    CSCI2421::Bag<string> tester;
 
-    testArray.print();
-    for(int x=0;x<12;x++)
-        testArray.push_back(x);
-    testArray.print();
-    cout<<"size of array is now: "<<testArray.size()<<endl;
-    cout<<"capacity is now: "<<testArray.capacity()<<endl;
+    for(int x=0;x<10;x++)
+        tester.insert("Test");
 
-    for(int x=0;x<12;x++)
-        testArray.insert(5,5);
+    tester.print();
+    //tester.erase("Test");
+    tester.print();
 
-    testArray.print();
-    cout<<"size of array is now: "<<testArray.size()<<endl;
-    cout<<"capacity is now: "<<testArray.capacity()<<endl;
+    CSCI2421::Bag<string> test2(tester);
+    test2.print();
+    test2.erase("Test");
+    tester=test2;
+    tester.print();
 
-    testArray.erase(5);
 
-    testArray.print();
-    cout<<"size of array is now: "<<testArray.size()<<endl;
-    cout<<"capacity is now: "<<testArray.capacity()<<endl;
 
-    cout<<"element at index 12: "<<testArray.get(12)<<endl;
-
-    CSCI2421::DynamicArray testArray2(testArray);
-    for(int x=0;x<12;x++)
-        testArray2.erase(5);
-    testArray2=testArray;
-
-    testArray2.print();
-    return 0;
 }

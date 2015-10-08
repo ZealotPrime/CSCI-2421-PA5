@@ -9,7 +9,7 @@ CSCI2421::Bag<T>::Bag(const std::size_t initialCapacity) : m_NumberOfElements(0)
     m_Data = new T[initialCapacity];
 }
 template<typename T>
-CSCI2421::Bag<T>::Bag(const CSCI2421::Bag &source) : m_NumberOfElements(source.m_NumberOfElements),
+CSCI2421::Bag<T>::Bag(const CSCI2421::Bag<T> &source) : m_NumberOfElements(source.m_NumberOfElements),
                                                   m_CurrentCapacity(source.m_CurrentCapacity)
 {
     m_Data = new T[m_CurrentCapacity];
@@ -107,7 +107,7 @@ void CSCI2421::Bag<T>::resizeArray(const std::size_t newCapacity)
 }
 
 template<typename T>
-void CSCI2421::Bag<T>::operator=(const CSCI2421::Bag &source)
+void CSCI2421::Bag<T>::operator=(const CSCI2421::Bag<T> &source)
 {
     if (this == &source)
         return;
